@@ -24,13 +24,8 @@ export class ClaimService {
 	constructor(private readonly _httpClient: HttpClient) {}
 
 	// create a claim
-	createClaim(
-		createClaimRequestDto: CreateClaimRequestDto,
-	): Observable<CreateClaimResponseDto> {
-		return this._httpClient.post<CreateClaimResponseDto>(
-			this._claimUrl,
-			createClaimRequestDto,
-		);
+	createClaim(createClaimRequestDto: FormData): Observable<CreateClaimResponseDto> {
+		return this._httpClient.post<CreateClaimResponseDto>(this._claimUrl, createClaimRequestDto);
 	}
 
 	// fetch all claims
@@ -40,22 +35,18 @@ export class ClaimService {
 
 	// fetch user claims
 	fetchUserClaims(): Observable<FetchClaimResponseDto[]> {
-		return this._httpClient.get<FetchClaimResponseDto[]>(
-			this._claimUrl + '/my-claims',
-		);
+		return this._httpClient.get<FetchClaimResponseDto[]>(this._claimUrl + '/my-claims');
 	}
 
 	// fetch claim by id
 	fetchClaim(claimId: string): Observable<FetchClaimResponseDto> {
-		return this._httpClient.get<FetchClaimResponseDto>(
-			`${this._claimUrl}/${claimId}`,
-		);
+		return this._httpClient.get<FetchClaimResponseDto>(`${this._claimUrl}/${claimId}`);
 	}
 
 	// update a claim
 	updateClaim(
 		claimId: string,
-		updateClaimRequestDto: UpdateClaimRequestDto,
+		updateClaimRequestDto: FormData,
 	): Observable<UpdateClaimResponseDto> {
 		return this._httpClient.patch<UpdateClaimResponseDto>(
 			`${this._claimUrl}/${claimId}`,
@@ -87,8 +78,6 @@ export class ClaimService {
 
 	// delete a claim
 	deleteClaim(claimId: string): Observable<DeleteClaimResponseDto> {
-		return this._httpClient.delete<DeleteClaimResponseDto>(
-			`${this._claimUrl}/${claimId}`,
-		);
+		return this._httpClient.delete<DeleteClaimResponseDto>(`${this._claimUrl}/${claimId}`);
 	}
 }

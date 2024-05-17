@@ -1,3 +1,3 @@
 export interface ApproveClaimRequestDto {
-  approvedAmt: number;
-};
+	approvedAmt: number;
+}

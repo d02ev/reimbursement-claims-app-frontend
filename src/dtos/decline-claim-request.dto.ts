@@ -1,3 +1,3 @@
 export interface DeclineClaimRequestDto {
-  notes?: string;
-};
+	notes?: string;
+}

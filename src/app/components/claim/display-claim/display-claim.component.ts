@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ClaimService } from '../../../services';
 import { FetchClaimResponseDto } from '../../../../dtos';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CreateClaimComponent } from '../create-claim/create-claim.component';
 
 @Component({
 	selector: 'app-display-claim',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, CreateClaimComponent],
 	templateUrl: './display-claim.component.html',
 	styleUrl: './display-claim.component.css',
 })

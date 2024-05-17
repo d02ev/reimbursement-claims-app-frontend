@@ -8,8 +8,6 @@ export const passwordMatchValidator = (): ValidatorFn => {
 			return null;
 		}
 
-		return passwordField?.value === control.value
-			? null
-			: { passwordsDoNotMatch: true };
+		return passwordField?.value === control.value ? null : { passwordsDoNotMatch: true };
 	};
 };

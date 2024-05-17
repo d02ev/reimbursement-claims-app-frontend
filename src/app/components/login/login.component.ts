@@ -73,10 +73,7 @@ export class LoginComponent {
 			},
 			error: (error: HttpErrorResponse) => {
 				if (error.status === 401) {
-					this.setUserLoginRequestStatus(
-						RequestStatusType.ERROR,
-						'Invalid credentials',
-					);
+					this.setUserLoginRequestStatus(RequestStatusType.ERROR, 'Invalid credentials');
 				}
 
 				this.setUserLoginRequestStatus(RequestStatusType.ERROR, error.message);

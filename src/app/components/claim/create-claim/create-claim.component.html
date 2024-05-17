@@ -1,1 +1,87 @@
-<p>create-claim works!</p>
+<div class="modal fade" [id]="modalId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="createClaimModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createClaimModalLabel">Generate Claim</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card rounded-1">
+          <div class="card-body">
+            <form [formGroup]="claimGenerationForm" (ngSubmit)="submitClaimGenerationForm($event)" class="form" novalidate>
+              <div class="form-group mb-3">
+                <label for="dateInput" class="form-label">Date</label>
+                <input [class.is-valid]="getClaimGenerationFormControlState('date')['isValidAndTouched']"
+                  [class.is-invalid]="getClaimGenerationFormControlState('date')['isInvalidAndTouched']"
+                  formControlName="date" type="date" class="form-control rounded-1" id="dateInput" />
+                <div
+                  *ngIf="getClaimGenerationFormControlState('date')['isTouchedOrDirty'] && getClaimGenerationFormControlError('date', 'required')"
+                  class="invalid-feedback">Date is required!</div>
+                <div *ngIf="getClaimGenerationFormControlState('date')['isValidAndTouched']" class="valid-feedback">
+                  Looks good!</div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="claimTypeInput" class="form-label">Type</label>
+                <select [class.is-valid]="getClaimGenerationFormControlState('type')['isValidAndTouched']"
+                  [class.is-invalid]="getClaimGenerationFormControlState('type')['isInvalidAndTouched']"
+                  formControlName="type" class="form-select rounded-1" id="claimTypeInput">
+                  <option value="">--- Select a claim type ---</option>
+                  <option *ngFor="let type of claimTypes | keyvalue" [value]="type.value">
+                    {{ type.value }}
+                  </option>
+                </select>
+                <div class="invalid-feedback"
+                  *ngIf="getClaimGenerationFormControlState('type')['isTouchedOrDirty'] && getClaimGenerationFormControlError('type', 'required')">
+                  Claim type is required!
+                </div>
+                <div class="valid-feedback" *ngIf="getClaimGenerationFormControlState('type')['isValidAndTouched']">
+                  Looks good!
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="requestedAmtInput" class="form-label">Requested Amount</label>
+                <input [class.is-valid]="getClaimGenerationFormControlState('requestedAmt')['isValidAndTouched']"
+                  [class.is-invalid]="getClaimGenerationFormControlState('requestedAmt')['isInvalidAndTouched']"
+                  formControlName="requestedAmt" type="number" class="form-control rounded-1" id="requestedAmtInput" />
+                <div
+                  *ngIf="getClaimGenerationFormControlState('requestedAmt')['isTouchedOrDirty'] && getClaimGenerationFormControlError('requestedAmt', 'required')"
+                  class="invalid-feedback">Requested amount is required!</div>
+                <div *ngIf="getClaimGenerationFormControlState('requestedAmt')['isValidAndTouched']"
+                  class="valid-feedback">
+                  Looks good!</div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="currencyInput" class="form-label">Currency</label>
+                <select [class.is-invalid]="getClaimGenerationFormControlState('currency')['isInvalidAndTouched']"
+                  [class.is-valid]="getClaimGenerationFormControlState('currency')['isValidAndTouched']"
+                  formControlName="currency" class="form-select rounded-1" id="currencyInput">
+                  <option value="">--- Select a currency ---</option>
+                  <option *ngFor="let currency of currencies | keyvalue" [value]="currency.value">
+                    {{ currency.value }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="getClaimGenerationFormControlState('currency')['isTouchedOrDirty'] && getClaimGenerationFormControlError('currency', 'required')"
+                  class="invalid-feedback">Currency is required!</div>
+                <div *ngIf="getClaimGenerationFormControlState('currency')['isValidAndTouched']" class="valid-feedback">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="receiptInput" class="form-label">Receipt</label>
+                <input [class.is-valid]="getClaimGenerationFormControlState('receipt')['isValidAndTouched']"
+                  [class.is-invalid]="getClaimGenerationFormControlState('receipt')['isInvalidAndTouched']"
+                  formControlName="receipt" type="file" id="receiptInput" class="form-control rounded-1"
+                  (change)="onFileSelect($event)" 
+                  />
+              </div>
+              <button tpye="button" class="btn btn-primary" [disabled]="claimGenerationForm.invalid">Generate</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- error and success alerts -->
+      </div>
+    </div>
+  </div>
+</div>

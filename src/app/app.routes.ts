@@ -29,24 +29,24 @@ export const routes: Routes = [
 		children: [
 			{
 				path: '',
-        canActivate: [authGuard],
-        data: { 'role': 'User' },
+				canActivate: [authGuard],
+				data: { role: 'User' },
 				component: DisplayClaimComponent,
 			},
 		],
 	},
-  {
-    path: 'admin/home',
-    canActivate: [authGuard],
-    component: LoggedInUserHomeComponent,
+	{
+		path: 'admin/home',
+		canActivate: [authGuard],
+		component: LoggedInUserHomeComponent,
 		canActivateChild: [adminGuard],
-    children: [
-      {
-        path: '',
-        canActivate: [authGuard],
-        data: { 'role': 'Admin' },
-        component: DisplayClaimComponent,
-      },
-    ]
-  }
+		children: [
+			{
+				path: '',
+				canActivate: [authGuard],
+				data: { role: 'Admin' },
+				component: DisplayClaimComponent,
+			},
+		],
+	},
 ];

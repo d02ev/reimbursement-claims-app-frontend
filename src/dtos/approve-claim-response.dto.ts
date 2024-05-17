@@ -1,4 +1,4 @@
 export interface ApproveClaimResponseDto {
-  statusCode: number;
-  message: string;
+	statusCode: number;
+	message: string;
 }

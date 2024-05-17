@@ -43,10 +43,7 @@ export class RegisterComponent {
 	) {}
 
 	userRegistrationForm: FormGroup = this._formBuilder.group({
-		fullName: new FormControl('', [
-			Validators.required,
-			Validators.pattern(this._fullNameRegex),
-		]),
+		fullName: new FormControl('', [Validators.required, Validators.pattern(this._fullNameRegex)]),
 		email: new FormControl('', [Validators.required, Validators.email]),
 		bankName: new FormControl('', [Validators.required]),
 		ifsc: new FormControl('', [
@@ -70,10 +67,7 @@ export class RegisterComponent {
 			Validators.maxLength(15),
 			Validators.pattern(this._passwordRegex),
 		]),
-		confirmPassword: new FormControl('', [
-			Validators.required,
-			passwordMatchValidator(),
-		]),
+		confirmPassword: new FormControl('', [Validators.required, passwordMatchValidator()]),
 	});
 
 	submitUserRegistrationForm(event: SubmitEvent): void {
@@ -84,16 +78,10 @@ export class RegisterComponent {
 
 		this._authService.register(registerUserRequestDto).subscribe({
 			next: (response: RegisterUserResponseDto) => {
-				this.setUserRegistrationRequestStatus(
-					RequestStatusType.SUCCESS,
-					response.message,
-				);
+				this.setUserRegistrationRequestStatus(RequestStatusType.SUCCESS, response.message);
 			},
 			error: (error: Error) => {
-				this.setUserRegistrationRequestStatus(
-					RequestStatusType.ERROR,
-					error.message,
-				);
+				this.setUserRegistrationRequestStatus(RequestStatusType.ERROR, error.message);
 			},
 			complete: () => {
 				setTimeout(() => {
@@ -127,17 +115,12 @@ export class RegisterComponent {
 		validationErrorType: string,
 	): boolean | undefined | null {
 		return (
-			this.userRegistrationForm
-				.get(controlName)
-				?.hasError(validationErrorType) ||
+			this.userRegistrationForm.get(controlName)?.hasError(validationErrorType) ||
 			this.userRegistrationForm.errors?.[validationErrorType]
 		);
 	}
 
-	setUserRegistrationRequestStatus(
-		type: RequestStatusType,
-		message: string,
-	): void {
+	setUserRegistrationRequestStatus(type: RequestStatusType, message: string): void {
 		this.userRegistrationRequestStatus = {
 			type,
 			message,
