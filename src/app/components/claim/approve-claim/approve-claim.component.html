@@ -1,1 +1,37 @@
-<p>approve-claim works!</p>
+<div class="modal fade" [id]="modalId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="approveClaimModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="approveClaimModalLabel">Approve Claim</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card rounded-1">
+          <div class="card-body">
+            <form [formGroup]="approveClaimForm" (ngSubmit)="submitApproveClaimForm($event)" class="form" novalidate>
+              <div class="form-group mb-3">
+                <label for="approvedAmtInput" class="form-label">Approved Amount</label>
+                <input [class.is-valid]="getApproveClaimFormControlState('approvedAmt')['isValidAndTouched']"
+                  [class.is-invalid]="getApproveClaimFormControlState('approvedAmt')['isInvalidAndTouched']"
+                  formControlName="approvedAmt" type="text" id="approvedAmtInput" class="form-control rounded-1" />
+                <div
+                  *ngIf="getApproveClaimFormControlState('approvedAmt')['isTouchedOrDirty'] && getApproveClaimFormControlError('approvedAmt', 'required')"
+                  class="invalid-feedback">
+                  Approved amount is required!</div>
+                <div *ngIf="getApproveClaimFormControlState('approvedAmt')['isValidAndTouched']" class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-1" type="submit" data-bs-dismiss="modal"
+                  [disabled]="approveClaimForm.invalid">Approve</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

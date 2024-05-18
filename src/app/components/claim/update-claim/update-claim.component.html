@@ -1,1 +1,53 @@
-<p>update-claim works!</p>
+<div class="modal fade" [id]="modalId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="updateClaimModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateClaimModalLabel">Update Claim</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card rounded-1">
+          <div class="card-body">
+            <form [formGroup]="updateClaimForm" (ngSubmit)="submitUpdateClaimForm($event)" class="form">
+              <div class="form-group mb-3">
+                <label for="dateInput" class="form-label">Date</label>
+                <input type="date" formControlName="date" id="dateInput" class="form-control rounded-1" />
+              </div>
+              <div class="form-group mb-3">
+                <label for="claimTypeInput" class="form-label">Type</label>
+                <select formControlName="type" class="form-select rounded-1" id="claimTypeInput">
+                  <option *ngFor="let type of claimTypes | keyvalue" [value]="type.value">
+                    {{ type.value }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="requestedAmtInput" class="form-label">Requested Amount</label>
+                <input type="number" formControlName="requestedAmt" class="form-control rounded-1"
+                  id="requestedAmtInput" />
+              </div>
+              <div class="form-group mb-3">
+                <label for="currencyInput" class="form-label">Currency</label>
+                <select formControlName="currency" class="form-select rounded-1" id="currencyInput">
+                  <option *ngFor="let currency of currencies | keyvalue" [value]="currency.value">
+                    {{ currency.value }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="receiptInput" class="form-label">Receipt</label>
+                <input type="file" formControlName="receipt" class="form-control rounded-1" id="receiptInput"
+                  (change)="onFileSelect($event)" />
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-1" type="submit" data-bs-dismiss="modal">Update</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

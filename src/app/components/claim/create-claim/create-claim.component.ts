@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
 	FormBuilder,
 	Validators,
@@ -27,6 +27,10 @@ export class CreateClaimComponent {
 	) {}
 
 	@Input({ required: true }) modalId: string = '';
+	@Output() claimGenerationResponseEvent = new EventEmitter<{
+		type: RequestStatusType;
+		message: string;
+	}>();
 
 	private selectedReceipt!: File;
 
@@ -38,11 +42,11 @@ export class CreateClaimComponent {
 		message: '',
 	};
 	claimGenerationForm: FormGroup = this._formBuilder.nonNullable.group({
-		date: new FormControl('', [Validators.required]),
-		type: new FormControl('', [Validators.required]),
-		requestedAmt: new FormControl('', [Validators.required]),
-		currency: new FormControl('', [Validators.required]),
-		receipt: new FormControl(null, [Validators.required]),
+		date: new FormControl<Date | null>(null, [Validators.required]),
+		type: new FormControl<string>('', [Validators.required]),
+		requestedAmt: new FormControl<number>(0, [Validators.required]),
+		currency: new FormControl<string>('', [Validators.required]),
+		receipt: new FormControl<File | null>(null, [Validators.required]),
 	});
 
 	onFileSelect(event: any) {
@@ -61,14 +65,12 @@ export class CreateClaimComponent {
 
 		this._claimService.createClaim(formData).subscribe({
 			next: (response: CreateClaimResponseDto) => {
-				// modal closes
-				// parent component refreshes
-				// success message emitted
+				this.setClaimGenerationRequestStatus(RequestStatusType.SUCCESS, response.message);
+				this.claimGenerationResponseEvent.emit(this.claimGenerationRequestStatus);
 			},
 			error: (error: HttpErrorResponse) => {
-				// modal closes
-				// no refresh
-				// error message emitted
+				this.setClaimGenerationRequestStatus(RequestStatusType.ERROR, error.message);
+				this.claimGenerationResponseEvent.emit(this.claimGenerationRequestStatus);
 			},
 		});
 	}

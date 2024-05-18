@@ -43,31 +43,34 @@ export class RegisterComponent {
 	) {}
 
 	userRegistrationForm: FormGroup = this._formBuilder.group({
-		fullName: new FormControl('', [Validators.required, Validators.pattern(this._fullNameRegex)]),
-		email: new FormControl('', [Validators.required, Validators.email]),
-		bankName: new FormControl('', [Validators.required]),
+		fullName: new FormControl<string>('', [
+			Validators.required,
+			Validators.pattern(this._fullNameRegex),
+		]),
+		email: new FormControl<string>('', [Validators.required, Validators.email]),
+		bankName: new FormControl<string>('', [Validators.required]),
 		ifsc: new FormControl('', [
 			Validators.required,
 			exactLength(11),
 			Validators.pattern(this._ifscRegex),
 		]),
-		bankAccNum: new FormControl('', [
+		bankAccNum: new FormControl<string>('', [
 			Validators.required,
 			exactLength(12),
 			Validators.pattern(this._bankAccNumRegex),
 		]),
-		pan: new FormControl('', [
+		pan: new FormControl<string>('', [
 			Validators.required,
 			exactLength(10),
 			Validators.pattern(this._panRegex),
 		]),
-		password: new FormControl('', [
+		password: new FormControl<string>('', [
 			Validators.required,
 			Validators.minLength(8),
 			Validators.maxLength(15),
 			Validators.pattern(this._passwordRegex),
 		]),
-		confirmPassword: new FormControl('', [Validators.required, passwordMatchValidator()]),
+		confirmPassword: new FormControl<string>('', [Validators.required, passwordMatchValidator()]),
 	});
 
 	submitUserRegistrationForm(event: SubmitEvent): void {

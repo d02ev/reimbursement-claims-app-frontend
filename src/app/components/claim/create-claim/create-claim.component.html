@@ -74,13 +74,13 @@
                   (change)="onFileSelect($event)" 
                   />
               </div>
-              <button tpye="button" class="btn btn-primary" [disabled]="claimGenerationForm.invalid">Generate</button>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-1" type="submit" data-bs-dismiss="modal" [disabled]="claimGenerationForm.invalid">Generate</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+              </div>
             </form>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <!-- error and success alerts -->
       </div>
     </div>
   </div>

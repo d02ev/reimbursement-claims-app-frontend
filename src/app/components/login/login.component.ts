@@ -38,8 +38,8 @@ export class LoginComponent {
 	) {}
 
 	userLoginForm: FormGroup = this._formBuilder.group({
-		email: new FormControl('', [Validators.required, Validators.email]),
-		password: new FormControl('', [Validators.required]),
+		email: new FormControl<string>('', [Validators.required, Validators.email]),
+		password: new FormControl<string>('', [Validators.required]),
 	});
 
 	submitUserLoginForm(event: SubmitEvent): void {

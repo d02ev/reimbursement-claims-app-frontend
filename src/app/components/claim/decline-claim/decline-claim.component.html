@@ -1,1 +1,28 @@
-<p>decline-claim works!</p>
+<div class="modal fade" [id]="modalId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="approveClaimModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="approveClaimModalLabel">Approve Claim</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card rounded-1">
+          <div class="card-body">
+            <form [formGroup]="declineClaimForm" (ngSubmit)="submitDeclineClaimForm($event)" class="form">
+              <div class="form-group mb-3">
+                <label for="notesInput" class="form-label">Notes</label>
+                <input formControlName="notes" type="text" id="notesInput" class="form-control rounded-1" />
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-1" type="submit" data-bs-dismiss="modal"
+                  [disabled]="declineClaimForm.invalid">Decline</button>
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
