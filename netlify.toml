@@ -1,0 +1,9 @@
+[[build]]
+base = "reimbursement-claims-app"
+command = "npm run build:prod"
+public = "dist/browser"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
