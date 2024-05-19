@@ -5,7 +5,8 @@
 		"ng": "ng",
 		"start": "ng serve",
 		"format": "npx prettier --write \"src/**/*.ts\"",
-		"build": "ng build",
+		"build:dev": "ng build",
+		"build:prod": "ng build --configuration production",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"prepare": "husky"
