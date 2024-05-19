@@ -1,5 +1,5 @@
 [build]
-base = "reimbursement-claims-app"
+base = "/"
 command = "npm run build:prod"
 public = "dist/browser"
 
