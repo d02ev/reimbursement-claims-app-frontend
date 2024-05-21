@@ -14,3 +14,4 @@ export * from './approve-claim-response.dto';
 export * from './decline-claim-request.dto';
 export * from './decline-claim-response.dto';
 export * from './delete-claim-response.dto';
+export * from './refresh-access-token-response.dto';

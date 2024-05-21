@@ -25,22 +25,28 @@ export class ClaimService {
 
 	// create a claim
 	createClaim(createClaimRequestDto: FormData): Observable<CreateClaimResponseDto> {
-		return this._httpClient.post<CreateClaimResponseDto>(this._claimUrl, createClaimRequestDto);
+		return this._httpClient.post<CreateClaimResponseDto>(this._claimUrl, createClaimRequestDto, {
+			withCredentials: true,
+		});
 	}
 
 	// fetch all claims
 	fetchAllClaims(): Observable<FetchClaimResponseDto[]> {
-		return this._httpClient.get<FetchClaimResponseDto[]>(this._claimUrl);
+		return this._httpClient.get<FetchClaimResponseDto[]>(this._claimUrl, { withCredentials: true });
 	}
 
 	// fetch user claims
 	fetchUserClaims(): Observable<FetchClaimResponseDto[]> {
-		return this._httpClient.get<FetchClaimResponseDto[]>(this._claimUrl + '/my-claims');
+		return this._httpClient.get<FetchClaimResponseDto[]>(this._claimUrl + '/my-claims', {
+			withCredentials: true,
+		});
 	}
 
 	// fetch claim by id
 	fetchClaim(claimId: string): Observable<FetchClaimResponseDto> {
-		return this._httpClient.get<FetchClaimResponseDto>(`${this._claimUrl}/${claimId}`);
+		return this._httpClient.get<FetchClaimResponseDto>(`${this._claimUrl}/${claimId}`, {
+			withCredentials: true,
+		});
 	}
 
 	// update a claim
@@ -51,6 +57,7 @@ export class ClaimService {
 		return this._httpClient.patch<UpdateClaimResponseDto>(
 			`${this._claimUrl}/${claimId}`,
 			updateClaimRequestDto,
+			{ withCredentials: true },
 		);
 	}
 
@@ -62,6 +69,7 @@ export class ClaimService {
 		return this._httpClient.patch<ApproveClaimResponseDto>(
 			`${this._claimUrl}/approve/${claimId}`,
 			approveClaimRequestDto,
+			{ withCredentials: true },
 		);
 	}
 
@@ -73,11 +81,14 @@ export class ClaimService {
 		return this._httpClient.patch<DeclineClaimResponseDto>(
 			`${this._claimUrl}/decline/${claimId}`,
 			declineClaimRequestDto,
+			{ withCredentials: true },
 		);
 	}
 
 	// delete a claim
 	deleteClaim(claimId: string): Observable<DeleteClaimResponseDto> {
-		return this._httpClient.delete<DeleteClaimResponseDto>(`${this._claimUrl}/${claimId}`);
+		return this._httpClient.delete<DeleteClaimResponseDto>(`${this._claimUrl}/${claimId}`, {
+			withCredentials: true,
+		});
 	}
 }
